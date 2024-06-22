@@ -9,3 +9,7 @@ script = ExtResource("1_i85p4")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.1, 0.1)
+
+[node name="TileMap" type="TileMap" parent="."]
+rendering_quadrant_size = 32
+format = 2

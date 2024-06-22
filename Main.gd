@@ -7,7 +7,9 @@ var num_rooms = 50
 var min_size = 4
 var max_size = 10
 var hspread = 400
-var cull = 0.5
+var cull = 0.6
+
+var path 
 
 func _ready():
 	randomize()
@@ -21,16 +23,49 @@ func make_rooms():
 		var h = min_size + randi() % (max_size - min_size)
 		r.make_room(pos, Vector2(w, h) * tile_size)
 		$Rooms.add_child(r)
+	await(get_tree().create_timer(1.1).timeout)
+	var room_positions = []
 	for room in $Rooms.get_children():
 		if randf() < cull:
 			room.queue_free()
 		else:
-			room.deactivation = RigidBody2D.FREEZE
+			room.freeze = true
+			room_positions.append(Vector2(room.position.x, room.position.y))
+	await get_tree().process_frame
+	path = find_mst(room_positions)
+
+func find_mst(nodes):
+	var path = AStar2D.new()
+	path.add_point(path.get_available_point_id(), nodes.pop_front())
+	
+	while nodes:
+		var min_distance = INF
+		var min_p = null
+		var p = null
+		for p1 in path.get_point_ids():
+			var p3
+			p3 = path.get_point_position(p1)
+			for p2 in nodes:
+				if p3.distance_to(p2) < min_distance:
+					min_distance = p3.distance_to(p2)
+					min_p = p2
+					p = p3
+		var n = path.get_available_point_id()
+		path.add_point(n, min_p)
+		path.connect_points(path.get_closest_point(p), n)
+		nodes.erase(min_p)
+	return path
 
 func _draw():
 	for room in $Rooms.get_children():
 		draw_rect(Rect2(room.position - room.size, room.size *2),
 			Color(32,228,0), false)
+	if path:
+		for p in path.get_point_ids():
+			for c in path.get_point_connections(p):
+				var pp = path.get_point_position(p)
+				var cp = path.get_point_position(c)
+				draw_line(Vector2(pp.x, pp.y), Vector2(cp.x, cp.y), Color(1,1,0), 15, true)
 
 func _process(delta):
 	queue_redraw()
