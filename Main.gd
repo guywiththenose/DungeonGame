@@ -1,6 +1,7 @@
 extends Node2D
 
 var Room = preload("res://Room.tscn")
+@onready var map = $TileMap
 
 var tile_size = 32
 var num_rooms = 50
@@ -66,6 +67,22 @@ func _draw():
 				var pp = path.get_point_position(p)
 				var cp = path.get_point_position(c)
 				draw_line(Vector2(pp.x, pp.y), Vector2(cp.x, cp.y), Color(1,1,0), 15, true)
+
+func make_map():
+	map.clear()
+	var full_rect = Rect2()
+	for room in $Rooms.get_children():
+			var r = Rect2(room.position - room.size, room.get_node("CollisionShape2D").shape.extents*2)
+			full_rect = full_rect.merge(r)
+	var topleft = map.local_to_map(full_rect.position)
+	var bottomright = map.local_to_map(full_rect.end)
+	for x in range(topleft.x, bottomright.x):
+		for y in range(topleft.y, bottomright.y):
+			tile_map.set_cells_terrain_connect(0, [Vector2i(x, y_over_x.y)], 0, 0)
+
+func _input(event):
+	if event.is_action_pressed("ui_accept"):
+		make_map()
 
 func _process(delta):
 	queue_redraw()
