@@ -425,7 +425,7 @@ script = ExtResource("1_i85p4")
 [node name="Rooms" type="Node2D" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.1, 0.1)
+zoom = Vector2(0.2, 0.2)
 
 [node name="TileMap" type="TileMap" parent="."]
 show_behind_parent = true

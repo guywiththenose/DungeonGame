@@ -3,7 +3,7 @@ extends Node2D
 var Room = preload("res://Room.tscn")
 @onready var map = $TileMap
 
-var tile_size = 32
+var tile_size = 16
 var num_rooms = 50
 var min_size = 4
 var max_size = 10
@@ -78,10 +78,17 @@ func make_map():
 	var bottomright = map.local_to_map(full_rect.end)
 	for x in range(topleft.x, bottomright.x):
 		for y in range(topleft.y, bottomright.y):
-			tile_map.set_cells_terrain_connect(0, [Vector2i(x, y_over_x.y)], 0, 0)
+			map.set_cell(0, Vector2i(x, y), 4, Vector2i(2, 1), 0)
+	for room in $Rooms.get_children():
+		var s = (room.size / tile_size).floor()
+		var pos = map.local_to_map(room.position)
+		var ul = (room.position / tile_size).floor() - s
+		for x in range(2, s.x * 2 -1):
+			for y in range(2, s.y * 2 -1):
+				map.set_cell(0, Vector2i(ul.x + x, ul.y + y), 4, Vector2i(4, 7), 0)
 
 func _input(event):
-	if event.is_action_pressed("ui_accept"):
+	if event.is_action_pressed("make"):
 		make_map()
 
 func _process(delta):
