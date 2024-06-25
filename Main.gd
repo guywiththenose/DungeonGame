@@ -1,6 +1,7 @@
 extends Node2D
 
 var Room = preload("res://Room.tscn")
+var Player = preload("res://player.tscn")
 @onready var map = $TileMap
 
 var tile_size = 16
@@ -11,10 +12,16 @@ var hspread = 400
 var cull = 0.6
 
 var path 
+var start_room
+var end_room
+
+var draw_rooms = false
 
 func _ready():
 	randomize()
 	make_rooms()
+	find_end_room()
+	find_start_room()
 
 func make_rooms():
 	for i in range(num_rooms):
@@ -58,6 +65,8 @@ func find_mst(nodes):
 	return path
 
 func _draw():
+	if not draw_rooms:
+		return
 	for room in $Rooms.get_children():
 		draw_rect(Rect2(room.position - room.size, room.size *2),
 			Color(32,228,0), false)
@@ -78,7 +87,8 @@ func make_map():
 	var bottomright = map.local_to_map(full_rect.end)
 	for x in range(topleft.x, bottomright.x):
 		for y in range(topleft.y, bottomright.y):
-			map.set_cell(0, Vector2i(x, y), 4, Vector2i(2, 1), 0)
+			map.set_cell(0, Vector2i(x, y), 4, Vector2i(1, 1), 0)
+	var corridors = []
 	for room in $Rooms.get_children():
 		var s = (room.size / tile_size).floor()
 		var pos = map.local_to_map(room.position)
@@ -86,10 +96,51 @@ func make_map():
 		for x in range(2, s.x * 2 -1):
 			for y in range(2, s.y * 2 -1):
 				map.set_cell(0, Vector2i(ul.x + x, ul.y + y), 4, Vector2i(4, 7), 0)
+		var p = path.get_closest_point(Vector2(room.position.x, room.position.y))
+		for conn in path.get_point_connections(p):
+			if not conn in corridors:
+				var start = map.local_to_map(Vector2(path.get_point_position(p).x, path.get_point_position(p).y))
+				var end = map.local_to_map(Vector2(path.get_point_position(conn).x, path.get_point_position(conn).y))
+				carve_path(start, end)
+		corridors.append(p)
+
+func carve_path(pos1, pos2):
+	var x_diff = sign(pos2.x - pos1.x)
+	var y_diff = sign(pos2.y - pos1.y)
+	if x_diff == 0: 
+		x_diff = pow(-1.0, randi() % 2)
+	if y_diff == 0: 
+		y_diff = pow(-1.0, randi() % 2)
+	var x_y = pos1
+	var y_x = pos2
+	if (randi() % 2) > 0:
+		x_y = pos2
+		y_x = pos1
+	for x in range(pos1.x, pos2.x, x_diff):
+		map.set_cell(0, Vector2i(x, x_y.y), 4, Vector2i(4, 7), 0);
+		map.set_cell(0, Vector2i(x, x_y.y + y_diff), 4, Vector2i(4, 7), 0);
+	for y in range(pos1.y, pos2.y, y_diff):
+		map.set_cell(0, Vector2i(y_x.x, y), 4, Vector2i(4, 7), 0);
+		map.set_cell(0, Vector2i(y_x.x + x_diff, y), 4, Vector2i(4, 7), 0);
+
+func find_start_room():
+	var min_x = INF
+	for room in $Rooms.get_children():
+		if room.position.x < min_x:
+			start_room = room
+			min_x = room.position.x
+
+func find_end_room():
+	var max_x = -INF
+	for room in $Rooms.get_children():
+		if room.position.x > max_x:
+			end_room = room
+			max_x = room.position.x
 
 func _input(event):
 	if event.is_action_pressed("make"):
 		make_map()
+		
 
 func _process(delta):
 	queue_redraw()
