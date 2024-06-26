@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c5kqwqcpr4yms"]
+[gd_scene load_steps=6 format=3 uid="uid://c5kqwqcpr4yms"]
 
 [ext_resource type="Script" path="res://Main.gd" id="1_8tl6d"]
 [ext_resource type="Texture2D" uid="uid://d21dvcpupfep4" path="res://0x72_16x16DungeonTileset.v5/0x72_16x16DungeonTileset.v5.png" id="2_htvec"]
+[ext_resource type="PackedScene" uid="uid://bn85kdfgutoyg" path="res://player.tscn" id="3_qc3ik"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o5xc4"]
 texture = ExtResource("2_htvec")
@@ -74,6 +75,7 @@ texture = ExtResource("2_htvec")
 1:1/0 = 0
 1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:1/0 = 0
 2:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:1/0/physics_layer_0/angular_velocity = 0.0
@@ -1056,11 +1058,15 @@ script = ExtResource("1_8tl6d")
 
 [node name="Rooms" type="Node2D" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(0.2, 0.2)
-
 [node name="TileMap" type="TileMap" parent="."]
 show_behind_parent = true
 tile_set = SubResource("TileSet_nr761")
 rendering_quadrant_size = 32
 format = 2
+
+[node name="Player" parent="." instance=ExtResource("3_qc3ik")]
+position = Vector2(2897, -1129)
+speed = 100
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(2, 2)

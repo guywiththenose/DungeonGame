@@ -5,7 +5,7 @@ var Player = preload("res://player.tscn")
 @onready var map = $TileMap
 
 var tile_size = 16
-var num_rooms = 50
+var num_rooms = 40
 var min_size = 4
 var max_size = 10
 var hspread = 400
@@ -14,14 +14,20 @@ var cull = 0.6
 var path 
 var start_room
 var end_room
+@onready var player = $Player
 
-var draw_rooms = false
+@export var draw_rooms = false
 
 func _ready():
 	randomize()
-	make_rooms()
-	find_end_room()
-	find_start_room()
+	await make_rooms()
+	await make_map()
+	await find_end_room()
+	await find_start_room()
+	await generate_player()
+
+func generate_player():
+	player.position = start_room.position
 
 func make_rooms():
 	for i in range(num_rooms):
