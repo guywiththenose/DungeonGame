@@ -29,6 +29,7 @@ func _ready():
 func generate_player():
 	player.position = start_room.position
 
+
 func make_rooms():
 	for i in range(num_rooms):
 		var pos = Vector2(randf_range(-hspread, hspread), 0)

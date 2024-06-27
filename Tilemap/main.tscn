@@ -1055,11 +1055,13 @@ sources/4 = SubResource("TileSetAtlasSource_o5xc4")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8tl6d")
+draw_rooms = true
 
 [node name="Rooms" type="Node2D" parent="."]
 
 [node name="TileMap" type="TileMap" parent="."]
 show_behind_parent = true
+visibility_layer = 3
 tile_set = SubResource("TileSet_nr761")
 rendering_quadrant_size = 32
 format = 2
@@ -1069,4 +1071,4 @@ position = Vector2(2897, -1129)
 speed = 100
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(2, 2)
+zoom = Vector2(0.1, 0.1)
