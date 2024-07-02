@@ -1047,7 +1047,8 @@ texture = ExtResource("2_htvec")
 15:15/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_nr761"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 3
+physics_layer_0/collision_mask = 3
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "miaow 0"
 terrain_set_0/terrain_0/color = Color(0.654175, 0.0468647, 0.533928, 1)
@@ -1060,6 +1061,7 @@ script = ExtResource("1_8tl6d")
 
 [node name="TileMap" type="TileMap" parent="."]
 show_behind_parent = true
+light_mask = 3
 visibility_layer = 3
 tile_set = SubResource("TileSet_nr761")
 rendering_quadrant_size = 32
