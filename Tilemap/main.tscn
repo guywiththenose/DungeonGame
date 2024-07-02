@@ -1055,7 +1055,6 @@ sources/4 = SubResource("TileSetAtlasSource_o5xc4")
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_8tl6d")
-draw_rooms = true
 
 [node name="Rooms" type="Node2D" parent="."]
 
@@ -1071,4 +1070,8 @@ position = Vector2(2897, -1129)
 speed = 100
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(0.1, 0.1)
+zoom = Vector2(2, 2)
+
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]

@@ -1,15 +1,17 @@
 extends Node2D
+@onready var spawners = $Spawners
 
 var Room = preload("res://Room.tscn")
 var Player = preload("res://player.tscn")
+var Enemy = preload("res://enemy_1.tscn")
 @onready var map = $TileMap
 
-var tile_size = 16
-var num_rooms = 40
-var min_size = 4
-var max_size = 10
-var hspread = 400
-var cull = 0.6
+@export var tile_size = 16
+@export var num_rooms = 30
+@export var min_size = 4
+@export var max_size = 10
+@export var hspread = -10
+@export var cull = 0.2
 
 var path 
 var start_room
@@ -24,11 +26,11 @@ func _ready():
 	await make_map()
 	await find_end_room()
 	await find_start_room()
+	await spawn_enemies()
 	await generate_player()
 
 func generate_player():
 	player.position = start_room.position
-
 
 func make_rooms():
 	for i in range(num_rooms):
@@ -46,8 +48,16 @@ func make_rooms():
 		else:
 			room.freeze = true
 			room_positions.append(Vector2(room.position.x, room.position.y))
+			var marker = Marker2D.new()
+			marker.global_position= Vector2(room.position.x, room.position.y)
+			spawners.add_child(marker)
+			
 	await get_tree().process_frame
 	path = find_mst(room_positions)
+
+func spawn_enemies():
+	var e = Enemy.instantiate
+	$Enemies.add_child(e)
 
 func find_mst(nodes):
 	var path = AStar2D.new()
