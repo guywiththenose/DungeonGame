@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://803psjm2r7tj"]
+
+[ext_resource type="Script" path="res://Throwing_Knife.gd" id="1_sfddl"]
+[ext_resource type="Texture2D" uid="uid://b7heuajffuu8s" path="res://New Piskel (2).png" id="1_t02mk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ob644"]
+radius = 9.0
+
+[sub_resource type="Animation" id="Animation_ltk3n"]
+resource_name = "Knife_Spin"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_13cgr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1akbx"]
+_data = {
+"Knife_Spin": SubResource("Animation_ltk3n"),
+"RESET": SubResource("Animation_13cgr")
+}
+
+[node name="Throwing_Knife" type="Area2D"]
+script = ExtResource("1_sfddl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ob644")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_t02mk")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_1akbx")
+}
+autoplay = "Knife_Spin"

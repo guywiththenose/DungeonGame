@@ -160,10 +160,5 @@ func find_end_room():
 			end_room = room
 			max_x = room.position.x
 
-func _input(event):
-	if event.is_action_pressed("make"):
-		make_map()
-		
-
 func _process(delta):
 	queue_redraw()
