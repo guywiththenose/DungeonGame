@@ -45,12 +45,15 @@ _data = {
 }
 
 [node name="Throwing_Knife" type="Area2D"]
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_sfddl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_ob644")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.71875, 0.75)
 texture = ExtResource("1_t02mk")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -58,3 +61,5 @@ libraries = {
 "": SubResource("AnimationLibrary_1akbx")
 }
 autoplay = "Knife_Spin"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

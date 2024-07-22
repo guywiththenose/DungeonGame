@@ -26,7 +26,7 @@ func _physics_process(delta):
 func knife():
 	var knife = throwing_knife.instantiate()
 	knife.global_position = global_position
-	knife.rotation(direction.angle())
+	knife.rotate(global_position.direction_to(get_global_mouse_position()).angle())
 	main.add_child(knife)
 	
 
