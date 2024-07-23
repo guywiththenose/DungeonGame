@@ -4,7 +4,7 @@ extends CharacterBody2D
 
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var sprite = $AnimatedSprite2D
-@export var health = 10
+@export var health = 2
 
 func _physics_process(delta):
 	var direction_to_player = global_position.direction_to(player.global_position)

@@ -29,5 +29,6 @@ func knife():
 	knife.rotate(global_position.direction_to(get_global_mouse_position()).angle())
 	main.add_child(knife)
 	
+	
 
 	

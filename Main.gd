@@ -3,6 +3,7 @@ extends Node2D
 var Room = preload("res://Room.tscn")
 var Player = preload("res://player.tscn")
 const ENEMY_1 = preload("res://enemy_1.tscn")
+const FINISH_PORTAL = preload("res://finish_portal.tscn")
 @onready var map = $TileMap
 @onready var main = get_node("/root/Main")
 
@@ -60,10 +61,18 @@ func make_rooms():
 func spawn_enemies():
 	spawners = $Spawners.get_children()
 	for spawn in spawners:
-		var enemy = ENEMY_1.instantiate()
-		var spawn_point = spawn
-		enemy.global_position = spawn_point.global_position
-		main.add_child(enemy)
+		if spawn.global_position == start_room.global_position or spawn.global_position == end_room.global_position:
+			continue
+		else:
+			var enemy = ENEMY_1.instantiate()
+			var spawn_point = spawn
+			enemy.global_position = spawn_point.global_position
+			main.add_child(enemy)
+
+func level_finish_generator():
+	var portal = FINISH_PORTAL.instantiate()
+	portal.global_position = end_room.global_position
+	main.add_child(portal)
 
 func find_mst(nodes):
 	var path = AStar2D.new()

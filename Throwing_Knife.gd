@@ -8,4 +8,8 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if body.is_in_group("walls"):
-		queue_free()
+		speed = 0
+		$AnimationPlayer.stop()
+	elif body.is_in_group("enemy") and body.has_method("take_damage"):
+		body.take_damage(1)
+		
