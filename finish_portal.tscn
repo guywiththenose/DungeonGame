@@ -1,53 +1,63 @@
-[gd_scene load_steps=8 format=3 uid="uid://oddt707ujfwl"]
+[gd_scene load_steps=9 format=3 uid="uid://d42r76ccqohv"]
 
 [ext_resource type="Texture2D" uid="uid://31j50kk6eosf" path="res://New Piskel (3).png" id="1_hnpwx"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4tuht"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_80uvx"]
+radius = 12.0
+height = 36.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1kln4"]
 atlas = ExtResource("1_hnpwx")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vtobw"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdexa"]
 atlas = ExtResource("1_hnpwx")
 region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_uadsv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2suv"]
 atlas = ExtResource("1_hnpwx")
 region = Rect2(0, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_meovy"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dlqeq"]
 atlas = ExtResource("1_hnpwx")
 region = Rect2(0, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3ib6e"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_way3j"]
 atlas = ExtResource("1_hnpwx")
 region = Rect2(0, 128, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_1rr5c"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_yqnkk"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4tuht")
+"texture": SubResource("AtlasTexture_1kln4")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_vtobw")
+"texture": SubResource("AtlasTexture_tdexa")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_uadsv")
+"texture": SubResource("AtlasTexture_y2suv")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_meovy")
+"texture": SubResource("AtlasTexture_dlqeq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3ib6e")
+"texture": SubResource("AtlasTexture_way3j")
 }],
 "loop": true,
 "name": &"default",
 "speed": 8.0
 }]
 
-[node name="finish_portal" type="AnimatedSprite2D"]
-position = Vector2(0, -1.00001)
-scale = Vector2(3.96875, 4.65625)
-sprite_frames = SubResource("SpriteFrames_1rr5c")
+[node name="Finish portal" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_80uvx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = -1
+position = Vector2(4.00001, 3.00927e-36)
+scale = Vector2(1.75, 1.90625)
+sprite_frames = SubResource("SpriteFrames_yqnkk")
 autoplay = "default"
-frame_progress = 0.88923
+frame_progress = 0.188319

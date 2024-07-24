@@ -29,6 +29,7 @@ func _ready():
 	await make_map()
 	await find_end_room()
 	await find_start_room()
+	await level_finish_generator()
 	await spawn_enemies()
 	await generate_player()
 
