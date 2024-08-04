@@ -39,3 +39,9 @@ shape = SubResource("CapsuleShape2D_jq5pa")
 sprite_frames = SubResource("SpriteFrames_sq2dd")
 autoplay = "default"
 frame_progress = 0.705093
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
