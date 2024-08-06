@@ -8,6 +8,8 @@ var knife_ready = false
 @onready var sprite = $PlayerSprite
 @onready var main = get_node('/root/Main')
 
+signal dead
+
 func _process(delta):
 	direction = Input.get_vector("left", "right", "up", "down")
 	if Input.is_action_pressed("attack") and knife_ready == true:
@@ -34,5 +36,7 @@ func knife():
 func _on_timer_timeout():
 	knife_ready = true
 
-
+func death():
+	if PlayerStats.player_health <= 0:
+		emit_signal("dead")
 
