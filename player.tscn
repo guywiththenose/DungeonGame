@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://bn85kdfgutoyg"]
+[gd_scene load_steps=10 format=3 uid="uid://bn85kdfgutoyg"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_v4u6f"]
 [ext_resource type="Texture2D" uid="uid://c85wxe1pxme2x" path="res://New Piskel.png" id="2_krigf"]
+[ext_resource type="Script" path="res://UI.gd" id="3_875vu"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jq5pa"]
 radius = 7.0
@@ -29,6 +30,12 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvr6b"]
+bg_color = Color(1, 0.335514, 0.269596, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jslra"]
+bg_color = Color(0.286275, 0.690196, 0.235294, 1)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_v4u6f")
 
@@ -43,5 +50,28 @@ frame_progress = 0.705093
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
 autostart = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+script = ExtResource("3_875vu")
+
+[node name="Control" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Health" type="ProgressBar" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 10.0
+offset_top = 12.0
+offset_right = -887.0
+offset_bottom = 39.0
+grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_mvr6b")
+theme_override_styles/fill = SubResource("StyleBoxFlat_jslra")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

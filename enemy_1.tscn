@@ -51,3 +51,5 @@ collision_layer = 0
 shape = SubResource("CircleShape2D_3jqm3")
 
 [node name="Damagetimer" type="Timer" parent="Hitbox" groups=["enemy"]]
+wait_time = 0.3
+one_shot = true
