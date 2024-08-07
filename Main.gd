@@ -32,6 +32,7 @@ func _ready():
 	await level_finish_generator()
 	await spawn_enemies()
 	await generate_player()
+	player.dead.connect(player_death)
 
 func generate_player():
 	player.position = start_room.position
@@ -169,6 +170,10 @@ func find_end_room():
 		if room.position.x > max_x:
 			end_room = room
 			max_x = room.position.x
+
+func player_death():
+	get_tree().change_scene_to_file("res://Menu.tscn")
+	
 
 func _process(delta):
 	queue_redraw()
