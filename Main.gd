@@ -32,7 +32,7 @@ func _ready():
 	await level_finish_generator()
 	await spawn_enemies()
 	await generate_player()
-	player.dead.connect(player_death)
+	PlayerStats.dead.connect(player_death)
 
 func generate_player():
 	player.position = start_room.position

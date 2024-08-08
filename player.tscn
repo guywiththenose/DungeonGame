@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bn85kdfgutoyg"]
+[gd_scene load_steps=14 format=3 uid="uid://bn85kdfgutoyg"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_v4u6f"]
 [ext_resource type="Texture2D" uid="uid://c85wxe1pxme2x" path="res://New Piskel.png" id="2_krigf"]
 [ext_resource type="Script" path="res://UI.gd" id="3_875vu"]
+[ext_resource type="Texture2D" uid="uid://clb6edpolnx2n" path="res://image.png" id="4_81hli"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jq5pa"]
 radius = 7.0
@@ -30,6 +31,42 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="Animation" id="Animation_3iv8o"]
+resource_name = "opacity"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.67451), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rhr33"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8yph3"]
+_data = {
+"RESET": SubResource("Animation_rhr33"),
+"opacity": SubResource("Animation_3iv8o")
+}
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mvr6b"]
 bg_color = Color(1, 0.335514, 0.269596, 1)
 
@@ -46,6 +83,19 @@ shape = SubResource("CapsuleShape2D_jq5pa")
 sprite_frames = SubResource("SpriteFrames_sq2dd")
 autoplay = "default"
 frame_progress = 0.705093
+
+[node name="red" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(2.38419e-07, -1)
+scale = Vector2(1.06667, 1)
+texture = ExtResource("4_81hli")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../red")
+libraries = {
+"": SubResource("AnimationLibrary_8yph3")
+}
+speed_scale = 4.0
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5

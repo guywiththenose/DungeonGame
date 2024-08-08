@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 @onready var health = $Control/Health
+@onready var red = $Control/red
 
 func _ready():
 	PlayerStats.take_damage.connect(update_health)

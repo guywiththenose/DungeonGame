@@ -7,8 +7,12 @@ var knife_ready = false
 
 @onready var sprite = $PlayerSprite
 @onready var main = get_node('/root/Main')
+@onready var animation_player = $AnimationPlayer
+@onready var red = $red
 
-signal dead
+func _ready():
+	PlayerStats.take_damage.connect(player_damage)
+	
 
 func _process(delta):
 	direction = Input.get_vector("left", "right", "up", "down")
@@ -21,9 +25,10 @@ func _physics_process(delta):
 	
 	if velocity.x > 0:
 		sprite.flip_h = false
+		red.flip_h = false
 	if velocity.x < 0:
 		sprite.flip_h = true
-		
+		red.flip_h = true
 		
 	move_and_slide()
 
@@ -35,8 +40,9 @@ func knife():
 	
 func _on_timer_timeout():
 	knife_ready = true
+	
+func player_damage():
+	animation_player.play("opacity")
+	
 
-func death():
-	if PlayerStats.player_health <= 0:
-		emit_signal("dead")
 
