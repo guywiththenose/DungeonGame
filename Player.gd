@@ -10,6 +10,8 @@ var knife_ready = false
 @onready var animation_player = $AnimationPlayer
 @onready var red = $red
 
+signal enemy
+
 func _ready():
 	PlayerStats.take_damage.connect(player_damage)
 	

@@ -10,5 +10,3 @@ func make_room(_pos,_size):
 	s.extents = size
 	$CollisionShape2D.shape = s
 	
-
-

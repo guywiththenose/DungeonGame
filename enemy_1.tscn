@@ -57,7 +57,9 @@ shape = SubResource("CircleShape2D_3jqm3")
 wait_time = 0.3
 one_shot = true
 
-[node name="Playerbox" type="Area2D" parent="."]
+[node name="Playerbox" type="Area2D" parent="." groups=["detector"]]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Playerbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Playerbox" groups=["detector"]]
 shape = SubResource("CircleShape2D_t3mkt")
+
+[connection signal="body_entered" from="Playerbox" to="." method="_on_playerbox_body_entered"]

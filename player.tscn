@@ -31,21 +31,6 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="Animation" id="Animation_3iv8o"]
-resource_name = "opacity"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:self_modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.67451), Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_rhr33"]
 length = 0.001
 tracks/0/type = "value"
@@ -59,6 +44,21 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_3iv8o"]
+resource_name = "opacity"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.67451), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8yph3"]
@@ -86,8 +86,8 @@ frame_progress = 0.705093
 
 [node name="red" type="Sprite2D" parent="."]
 self_modulate = Color(1, 1, 1, 0)
-position = Vector2(2.38419e-07, -1)
-scale = Vector2(1.06667, 1)
+position = Vector2(-0.500012, -1)
+scale = Vector2(1, 1)
 texture = ExtResource("4_81hli")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
