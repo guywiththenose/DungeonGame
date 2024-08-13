@@ -13,6 +13,8 @@ const FINISH_PORTAL = preload("res://finish_portal.tscn")
 @export var max_size = 10
 @export var hspread = -10
 @export var cull = 0.2
+@export var enemy_min = 1
+@export var enemy_max = 10
 
 var path 
 var start_room
@@ -66,10 +68,18 @@ func spawn_enemies():
 		if spawn.global_position == start_room.global_position or spawn.global_position == end_room.global_position:
 			continue
 		else:
-			var enemy = ENEMY_1.instantiate()
-			var spawn_point = spawn
-			enemy.global_position = spawn_point.global_position
-			main.add_child(enemy)
+			#var enemy = ENEMY_1.instantiate()
+			#var spawn_point = spawn
+			#enemy.global_position = spawn_point.global_position
+			#main.add_child(enemy)
+			
+			var enemy_number = round(randi_range(enemy_min,enemy_max))
+			for i in range(0, enemy_number):
+				var enemy = ENEMY_1.instantiate()
+				var spawn_point = spawn
+				enemy.global_position = spawn_point.global_position
+				main.add_child(enemy)
+				enemy.global_position += Vector2(randi_range(-30,30), randi_range(-30,30))
 
 func level_finish_generator():
 	var portal = FINISH_PORTAL.instantiate()
