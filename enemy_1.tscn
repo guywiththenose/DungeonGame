@@ -65,6 +65,7 @@ one_shot = true
 shape = SubResource("CircleShape2D_t3mkt")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+debug_enabled = true
 
 [node name="NavTimer" type="Timer" parent="."]
 wait_time = 0.1

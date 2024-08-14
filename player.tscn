@@ -126,6 +126,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_jslra")
 value = 100.0
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 shadow_enabled = true
 texture = ExtResource("5_4pjbj")
 

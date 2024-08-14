@@ -8,6 +8,7 @@ extends CharacterBody2D
 @onready var damagetimer = $Hitbox/Damagetimer
 @export var damage = 5
 @onready var navigation_agent := $NavigationAgent2D as NavigationAgent2D
+
 var moveable = false
 
 func check_collision():
@@ -36,8 +37,6 @@ func take_damage(dmg):
 	health -= dmg
 	if health <= 0:
 		queue_free()
-
-
 
 func _on_playerbox_body_entered(body):
 	if body.is_in_group("player"):
