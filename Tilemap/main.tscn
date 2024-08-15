@@ -1090,11 +1090,16 @@ position = Vector2(2897, -1129)
 speed = 100
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)
+position_smoothing_enabled = true
+position_smoothing_speed = 2.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
 
 [node name="Spawners" type="Node2D" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.791999, 0.791999, 0.791999, 1)

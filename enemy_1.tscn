@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_du7jf"]
 radius = 6.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gh23n"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cgwjr"]
 light_mode = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vtmsx"]
@@ -48,7 +48,7 @@ script = ExtResource("1_rwyqi")
 shape = SubResource("CircleShape2D_du7jf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-material = SubResource("CanvasItemMaterial_gh23n")
+material = SubResource("CanvasItemMaterial_cgwjr")
 sprite_frames = SubResource("SpriteFrames_nmvkt")
 autoplay = "default"
 frame_progress = 0.567714
@@ -69,7 +69,6 @@ one_shot = true
 shape = SubResource("CircleShape2D_t3mkt")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
-debug_enabled = true
 
 [node name="NavTimer" type="Timer" parent="."]
 wait_time = 0.1

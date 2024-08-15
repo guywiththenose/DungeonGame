@@ -4,6 +4,7 @@ var Room = preload("res://Room.tscn")
 var Player = preload("res://player.tscn")
 const ENEMY_1 = preload("res://enemy_1.tscn")
 const FINISH_PORTAL = preload("res://finish_portal.tscn")
+const BOX = preload("res://box.tscn")
 @onready var map = $TileMap
 @onready var main = get_node("/root/Main")
 
@@ -15,6 +16,9 @@ const FINISH_PORTAL = preload("res://finish_portal.tscn")
 @export var cull = 0.2
 @export var enemy_min = 1
 @export var enemy_max = 10
+@export var box_min = 0
+@export var box_max = 3
+
 
 var path 
 var start_room
@@ -33,6 +37,7 @@ func _ready():
 	await find_start_room()
 	await level_finish_generator()
 	await spawn_enemies()
+	await spawn_boxes()
 	await generate_player()
 	PlayerStats.dead.connect(player_death)
 
@@ -68,10 +73,6 @@ func spawn_enemies():
 		if spawn.global_position == start_room.global_position or spawn.global_position == end_room.global_position:
 			continue
 		else:
-			#var enemy = ENEMY_1.instantiate()
-			#var spawn_point = spawn
-			#enemy.global_position = spawn_point.global_position
-			#main.add_child(enemy)
 			
 			var enemy_number = round(randi_range(enemy_min,enemy_max))
 			for i in range(0, enemy_number):
@@ -80,6 +81,21 @@ func spawn_enemies():
 				enemy.global_position = spawn_point.global_position
 				main.add_child(enemy)
 				enemy.global_position += Vector2(randi_range(-30,30), randi_range(-30,30))
+
+func spawn_boxes():
+	spawners = $Spawners.get_children()
+	for spawn in spawners:
+		if spawn.global_position == start_room.global_position or spawn.global_position == end_room.global_position:
+			continue
+		else:
+		
+			var box_number = round(randi_range(box_min,box_max))
+			for i in range(0, box_number):
+				var box = BOX.instantiate()
+				var spawn_point = spawn
+				box.global_position = spawn_point.global_position
+				main.add_child(box)
+				box.global_position += Vector2(randi_range(-25,25), randi_range(-25,25))
 
 func level_finish_generator():
 	var portal = FINISH_PORTAL.instantiate()
