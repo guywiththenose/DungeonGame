@@ -1097,5 +1097,4 @@ zoom = Vector2(2, 2)
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-color = Color(0, 0, 0, 1)
+color = Color(0.791999, 0.791999, 0.791999, 1)

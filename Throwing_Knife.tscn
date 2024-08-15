@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://803psjm2r7tj"]
+[gd_scene load_steps=8 format=3 uid="uid://803psjm2r7tj"]
 
 [ext_resource type="Script" path="res://Throwing_Knife.gd" id="1_sfddl"]
 [ext_resource type="Texture2D" uid="uid://b7heuajffuu8s" path="res://New Piskel (2).png" id="1_t02mk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ob644"]
 radius = 9.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v6lti"]
+light_mode = 2
 
 [sub_resource type="Animation" id="Animation_ltk3n"]
 resource_name = "Knife_Spin"
@@ -53,6 +56,7 @@ script = ExtResource("1_sfddl")
 shape = SubResource("CircleShape2D_ob644")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_v6lti")
 scale = Vector2(0.71875, 0.75)
 texture = ExtResource("1_t02mk")
 

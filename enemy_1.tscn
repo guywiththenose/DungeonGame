@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://dcajt3wb8tek2"]
+[gd_scene load_steps=10 format=3 uid="uid://dcajt3wb8tek2"]
 
 [ext_resource type="Script" path="res://Enemy1.gd" id="1_rwyqi"]
 [ext_resource type="Texture2D" uid="uid://4xftw8hs4527" path="res://New Piskel (1).png" id="2_v6anf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_du7jf"]
 radius = 6.0
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gh23n"]
+light_mode = 2
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vtmsx"]
 atlas = ExtResource("2_v6anf")
@@ -45,6 +48,7 @@ script = ExtResource("1_rwyqi")
 shape = SubResource("CircleShape2D_du7jf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_gh23n")
 sprite_frames = SubResource("SpriteFrames_nmvkt")
 autoplay = "default"
 frame_progress = 0.567714
@@ -70,6 +74,9 @@ debug_enabled = true
 [node name="NavTimer" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(200, 0)
 
 [connection signal="body_entered" from="Playerbox" to="." method="_on_playerbox_body_entered"]
 [connection signal="timeout" from="NavTimer" to="." method="_on_nav_timer_timeout"]
