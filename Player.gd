@@ -46,5 +46,3 @@ func _on_timer_timeout():
 func player_damage():
 	animation_player.play("opacity")
 	
-
-

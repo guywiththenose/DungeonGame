@@ -61,4 +61,3 @@ func make_path() -> void:
 func _on_nav_timer_timeout():
 	if player_spotted:
 		make_path()
-
