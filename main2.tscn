@@ -1,24 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5kqwqcpr4yms"]
+[gd_scene load_steps=5 format=3 uid="uid://dwlpjqrrxufxb"]
 
-[ext_resource type="Script" path="res://Main.gd" id="1_8tl6d"]
-[ext_resource type="Texture2D" uid="uid://d21dvcpupfep4" path="res://0x72_16x16DungeonTileset.v5/0x72_16x16DungeonTileset.v5.png" id="2_htvec"]
-[ext_resource type="PackedScene" uid="uid://bn85kdfgutoyg" path="res://player.tscn" id="3_qc3ik"]
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_jum20"]
-source_geometry_group_name = &"navigation_polygon_source_group"
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_si01u"]
-polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_t2kvq"]
-vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
-source_geometry_group_name = &"navigation_polygon_source_group"
-agent_radius = 0.0
+[ext_resource type="Script" path="res://Main.gd" id="1_q70o2"]
+[ext_resource type="Texture2D" uid="uid://d21dvcpupfep4" path="res://0x72_16x16DungeonTileset.v5/0x72_16x16DungeonTileset.v5.png" id="2_f0h4f"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o5xc4"]
-texture = ExtResource("2_htvec")
+texture = ExtResource("2_f0h4f")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -42,11 +28,7 @@ texture = ExtResource("2_htvec")
 20:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
-1:1/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_si01u")
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
-1:1/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_jum20")
 2:1/0 = 0
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 3:1/0 = 0
 4:1/0 = 0
 5:1/0 = 0
@@ -263,7 +245,6 @@ texture = ExtResource("2_htvec")
 4:7/0/terrains_peering_bit/top_left_corner = 0
 4:7/0/terrains_peering_bit/top_side = 0
 4:7/0/terrains_peering_bit/top_right_corner = 0
-4:7/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_t2kvq")
 5:7/0 = 0
 6:7/0 = 0
 7:7/0 = 0
@@ -433,43 +414,22 @@ texture = ExtResource("2_htvec")
 15:15/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_nr761"]
-occlusion_layer_0/light_mask = 1
-occlusion_layer_0/sdf_collision = true
-physics_layer_0/collision_layer = 3
-physics_layer_0/collision_mask = 3
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "miaow 0"
 terrain_set_0/terrain_0/color = Color(0.654175, 0.0468647, 0.533928, 1)
-navigation_layer_0/layers = 1
 sources/4 = SubResource("TileSetAtlasSource_o5xc4")
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_8tl6d")
+script = ExtResource("1_q70o2")
 
 [node name="Rooms" type="Node2D" parent="."]
 
-[node name="TileMap" type="TileMap" parent="." groups=["walls"]]
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.2, 0.2)
+
+[node name="TileMap" type="TileMap" parent="."]
 show_behind_parent = true
-z_index = -2
 tile_set = SubResource("TileSet_nr761")
 rendering_quadrant_size = 32
 format = 2
-
-[node name="Player" parent="." instance=ExtResource("3_qc3ik")]
-position = Vector2(2897, -1129)
-speed = 100
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(2, 2)
-position_smoothing_enabled = true
-position_smoothing_speed = 2.0
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
-
-[node name="Spawners" type="Node2D" parent="."]
-
-[node name="Enemies" type="Node2D" parent="."]
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-color = Color(0.791999, 0.791999, 0.791999, 1)
+layer_0/tile_data = PackedInt32Array(65537, 4, 7, 131073, 4, 7, 196609, 4, 8, 196610, 65540, 8, 196611, 65540, 8, 196612, 65540, 8, 196613, 196612, 8, 131077, 196612, 7, 65541, 196612, 7, 65540, 65540, 7, 65539, 262148, 7, 65538, 262148, 7, 131074, 65540, 7, 131075, 65540, 7, 131076, 65540, 7, 1, 4, 6, 2, 131076, 6, 3, 131076, 6, 4, 131076, 6, 5, 196612, 6)

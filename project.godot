@@ -21,6 +21,10 @@ PlayerStats="*res://Singletons/player_stats.gd"
 Knife="*res://Singletons/knife.gd"
 InteractionManager="*res://Interaction/InteractionManager.tscn"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [input]
 
 attack={

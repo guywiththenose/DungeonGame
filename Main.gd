@@ -9,15 +9,15 @@ const BOX = preload("res://box.tscn")
 @onready var main = get_node("/root/Main")
 
 @export var tile_size = 16
-@export var num_rooms = 30
+@export var num_rooms = 50
 @export var min_size = 4
-@export var max_size = 10
-@export var hspread = -10
-@export var cull = 0.2
-@export var enemy_min = 1
-@export var enemy_max = 10
+@export var max_size = 13
+@export var hspread = 15
+@export var cull = 0.3
+@export var enemy_min = 2
+@export var enemy_max = 12
 @export var box_min = 0
-@export var box_max = 3
+@export var box_max = 2
 
 
 var path 
@@ -155,6 +155,7 @@ func make_map():
 		var ul = (room.position / tile_size).floor() - s
 		for x in range(2, s.x * 2 -1):
 			for y in range(2, s.y * 2 -1):
+				map.set_cell(0, Vector2i(ul.x + x, ul.y + y), 4, Vector2i(4, 7), 0)
 				map.set_cell(0, Vector2i(ul.x + x, ul.y + y), 4, Vector2i(4, 7), 0)
 		var p = path.get_closest_point(Vector2(room.position.x, room.position.y))
 		for conn in path.get_point_connections(p):
