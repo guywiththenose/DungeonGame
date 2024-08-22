@@ -2,6 +2,9 @@ extends Area2D
 var interactable = false
 @onready var label = $Label
 
+func _ready() -> void:
+	label.hide()
+
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		interactable = true
