@@ -9,15 +9,15 @@ const BOX = preload("res://box.tscn")
 @onready var main = get_node("/root/Main")
 
 @export var tile_size = 16
-@export var num_rooms = 50
-@export var min_size = 4
-@export var max_size = 13
-@export var hspread = 15
-@export var cull = 0.3
-@export var enemy_min = 2
-@export var enemy_max = 12
-@export var box_min = 0
-@export var box_max = 2
+@export var num_rooms = randi_range(10,60)
+@export var min_size = randi_range(2,10)
+@export var max_size = randi_range(5,20)
+@export var hspread = randi_range(0,20)
+@export var cull = randi_range(0.1,0.6)
+@export var enemy_min = randf_range(1,5)
+@export var enemy_max = randi_range(5,10)
+@export var box_min = randi_range(1,2)
+@export var box_max = randi_range(2,5)
 
 
 var path 
