@@ -5,5 +5,6 @@ func _on_quit_pressed():
 
 
 func _on_start_pressed():
+	print("sexy")
 	get_tree().change_scene_to_file("res://Tilemap/main.tscn")
-	PlayerStats.player_health = 100
+	#PlayerStats.player_health = 100

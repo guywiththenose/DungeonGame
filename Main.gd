@@ -19,7 +19,6 @@ const BOX = preload("res://box.tscn")
 @export var box_min = randi_range(1,2)
 @export var box_max = randi_range(2,5)
 
-
 var path 
 var start_room
 var end_room
@@ -105,7 +104,7 @@ func level_finish_generator():
 func find_mst(nodes):
 	var path = AStar2D.new()
 	path.add_point(path.get_available_point_id(), nodes.pop_front())
-	
+
 	while nodes:
 		var min_distance = INF
 		var min_p = null
@@ -200,7 +199,6 @@ func find_end_room():
 
 func player_death():
 	get_tree().change_scene_to_file("res://Menu.tscn")
-	
 
 func _process(delta):
 	queue_redraw()

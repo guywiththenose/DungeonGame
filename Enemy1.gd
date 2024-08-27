@@ -36,7 +36,7 @@ func _physics_process(delta: float) -> void:
 			sprite.flip_h = true
 		else:
 			sprite.flip_h = false
-	
+			
 	move_and_slide()
 	check_collision()
 

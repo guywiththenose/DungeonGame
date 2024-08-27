@@ -7,7 +7,6 @@ var pierce = 2
 func _physics_process(delta):
 	translate(Vector2.RIGHT.rotated(rotation) * speed * delta)
 
-
 func _on_body_entered(body):
 	if body.is_in_group("walls"):
 		speed = 0
@@ -18,7 +17,6 @@ func _on_body_entered(body):
 		pierce -= 1
 		if pierce <= 0:
 			queue_free()
-
 
 func _on_timer_timeout():
 	queue_free()

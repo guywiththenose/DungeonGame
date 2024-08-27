@@ -39,10 +39,9 @@ func knife():
 	knife.global_position = global_position
 	knife.rotate(global_position.direction_to(get_global_mouse_position()).angle())
 	main.add_child(knife)
-	
+
 func _on_timer_timeout():
 	knife_ready = true
-	
+
 func player_damage():
 	animation_player.play("opacity")
-	
