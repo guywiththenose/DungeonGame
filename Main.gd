@@ -9,13 +9,13 @@ const BOX = preload("res://box.tscn")
 @onready var main = get_node("/root/Main")
 
 @export var tile_size = 16
-@export var num_rooms = randi_range(10,60)
-@export var min_size = randi_range(2,10)
-@export var max_size = randi_range(5,20)
-@export var hspread = randi_range(0,20)
+@export var num_rooms = LevelStats.numRooms
+@export var min_size = randi_range(2,5)
+@export var max_size = randi_range(5,13)
+@export var hspread = LevelStats.hSpread
 @export var cull = randi_range(0.1,0.6)
-@export var enemy_min = randf_range(1,5)
-@export var enemy_max = randi_range(5,10)
+@export var enemy_min = LevelStats.enMin
+@export var enemy_max = LevelStats.enMax
 @export var box_min = randi_range(1,2)
 @export var box_max = randi_range(2,5)
 
@@ -82,19 +82,22 @@ func spawn_enemies():
 				enemy.global_position += Vector2(randi_range(-30,30), randi_range(-30,30))
 
 func spawn_boxes():
-	spawners = $Spawners.get_children()
-	for spawn in spawners:
-		if spawn.global_position == start_room.global_position or spawn.global_position == end_room.global_position:
-			continue
-		else:
-		
-			var box_number = round(randi_range(box_min,box_max))
-			for i in range(0, box_number):
-				var box = BOX.instantiate()
-				var spawn_point = spawn
-				box.global_position = spawn_point.global_position
-				main.add_child(box)
-				box.global_position += Vector2(randi_range(-25,25), randi_range(-25,25))
+	if LevelStats.boxes == true:
+		spawners = $Spawners.get_children()
+		for spawn in spawners:
+			if spawn.global_position == start_room.global_position or spawn.global_position == end_room.global_position:
+				continue
+			else:
+			
+				var box_number = round(randi_range(box_min,box_max))
+				for i in range(0, box_number):
+					var box = BOX.instantiate()
+					var spawn_point = spawn
+					box.global_position = spawn_point.global_position
+					main.add_child(box)
+					box.global_position += Vector2(randi_range(-25,25), randi_range(-25,25))
+	else:
+		pass
 
 func level_finish_generator():
 	var portal = FINISH_PORTAL.instantiate()

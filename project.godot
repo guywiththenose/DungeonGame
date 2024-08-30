@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 PlayerStats="*res://Singletons/player_stats.gd"
 Knife="*res://Singletons/knife.gd"
 InteractionManager="*res://Interaction/InteractionManager.tscn"
+LevelStats="*res://Singletons/level_stats.gd"
 
 [display]
 

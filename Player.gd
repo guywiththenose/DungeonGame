@@ -9,11 +9,13 @@ var knife_ready = false
 @onready var main = get_node('/root/Main')
 @onready var animation_player = $AnimationPlayer
 @onready var red = $red
+@onready var UI = $UI
 
 signal enemy
 
 func _ready():
 	PlayerStats.take_damage.connect(player_damage)
+	UI.update_health()
 	
 
 func _process(delta):
