@@ -10,7 +10,7 @@ const BOX = preload("res://box.tscn")
 
 @export var tile_size = 16
 @export var num_rooms = LevelStats.numRooms
-@export var min_size = randi_range(2,5)
+@export var min_size = randi_range(4,5)
 @export var max_size = randi_range(5,13)
 @export var hspread = LevelStats.hSpread
 @export var cull = randi_range(0.1,0.6)
@@ -18,6 +18,10 @@ const BOX = preload("res://box.tscn")
 @export var enemy_max = LevelStats.enMax
 @export var box_min = randi_range(1,2)
 @export var box_max = randi_range(2,5)
+var xf = LevelStats.XF
+var yf = LevelStats.YF
+var xw = LevelStats.XW
+var yw = LevelStats.YW
 
 var path 
 var start_room
@@ -41,7 +45,7 @@ func _ready():
 	PlayerStats.dead.connect(player_death)
 
 func generate_player():
-	player.position = start_room.position
+	player.position = end_room.position
 
 func make_rooms():
 	for i in range(num_rooms):
@@ -149,7 +153,7 @@ func make_map():
 	var bottomright = map.local_to_map(full_rect.end)
 	for x in range(topleft.x, bottomright.x):
 		for y in range(topleft.y, bottomright.y):
-			map.set_cell(0, Vector2i(x, y), 4, Vector2i(1, 1), 0)
+			map.set_cell(0, Vector2i(x, y), 4, Vector2i(xw, yw), 0)
 	var corridors = []
 	for room in $Rooms.get_children():
 		var s = (room.size / tile_size).floor()
@@ -157,8 +161,8 @@ func make_map():
 		var ul = (room.position / tile_size).floor() - s
 		for x in range(2, s.x * 2 -1):
 			for y in range(2, s.y * 2 -1):
-				map.set_cell(0, Vector2i(ul.x + x, ul.y + y), 4, Vector2i(4, 7), 0)
-				map.set_cell(0, Vector2i(ul.x + x, ul.y + y), 4, Vector2i(4, 7), 0)
+				map.set_cell(0, Vector2i(ul.x + x, ul.y + y), 4, Vector2i(xf, yf), 0)
+				map.set_cell(0, Vector2i(ul.x + x, ul.y + y), 4, Vector2i(xf, yf), 0)
 		var p = path.get_closest_point(Vector2(room.position.x, room.position.y))
 		for conn in path.get_point_connections(p):
 			if not conn in corridors:

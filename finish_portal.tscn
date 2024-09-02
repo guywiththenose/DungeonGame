@@ -1,61 +1,63 @@
-[gd_scene load_steps=12 format=3 uid="uid://d42r76ccqohv"]
+[gd_scene load_steps=11 format=3 uid="uid://d42r76ccqohv"]
 
 [ext_resource type="Texture2D" uid="uid://31j50kk6eosf" path="res://New Piskel (3).png" id="1_hnpwx"]
 [ext_resource type="Script" path="res://finish_portal.gd" id="1_mju7m"]
-[ext_resource type="FontFile" uid="uid://by3065pmfv184" path="res://alagard/alagard.ttf" id="2_w1hfp"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_80uvx"]
-radius = 12.0
-height = 36.0
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xcqmf"]
+radius = 20.0
+height = 58.0
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_g1jmy"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ve3hn"]
 light_mode = 2
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1kln4"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_cvcjk"]
 atlas = ExtResource("1_hnpwx")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tdexa"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_46ug0"]
 atlas = ExtResource("1_hnpwx")
 region = Rect2(0, 32, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y2suv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_t1vp5"]
 atlas = ExtResource("1_hnpwx")
 region = Rect2(0, 64, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dlqeq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_5fx02"]
 atlas = ExtResource("1_hnpwx")
 region = Rect2(0, 96, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_way3j"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_p3im6"]
 atlas = ExtResource("1_hnpwx")
 region = Rect2(0, 128, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_yqnkk"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_l1osn"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_1kln4")
+"texture": SubResource("AtlasTexture_cvcjk")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tdexa")
+"texture": SubResource("AtlasTexture_46ug0")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y2suv")
+"texture": SubResource("AtlasTexture_t1vp5")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dlqeq")
+"texture": SubResource("AtlasTexture_5fx02")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_way3j")
+"texture": SubResource("AtlasTexture_p3im6")
 }],
 "loop": true,
 "name": &"default",
-"speed": 8.0
+"speed": 7.0
 }]
 
 [node name="Finish portal" type="Area2D"]
 script = ExtResource("1_mju7m")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_xcqmf")
 
 [node name="Label" type="Label" parent="."]
 z_index = 20
@@ -67,22 +69,16 @@ offset_top = -36.0
 offset_right = 52.0
 offset_bottom = -21.0
 grow_horizontal = 2
-theme_override_fonts/font = ExtResource("2_w1hfp")
-text = "[E] to interact"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_80uvx")
+text = "[E] To Interact"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 z_index = -1
-material = SubResource("CanvasItemMaterial_g1jmy")
-position = Vector2(4.00001, 3.00927e-36)
-scale = Vector2(1.75, 1.90625)
-sprite_frames = SubResource("SpriteFrames_yqnkk")
+material = SubResource("CanvasItemMaterial_ve3hn")
+position = Vector2(2, 0)
+scale = Vector2(1.5625, 1.5625)
+sprite_frames = SubResource("SpriteFrames_l1osn")
 autoplay = "default"
-frame_progress = 0.188319
+frame_progress = 0.0425758
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]
