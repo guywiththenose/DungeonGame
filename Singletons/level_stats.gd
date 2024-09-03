@@ -6,10 +6,10 @@ var hSpread = 1.0
 var enMin = 1
 var enMax = 3
 var boxes = false
-var XF = 4
-var YF = 7
-var XW = 1
-var YW = 1
+var XF = 1
+var YF = 0
+var XW = 0
+var YW = 0
 
 func update_level():
 	level_number += 1

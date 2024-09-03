@@ -8,7 +8,7 @@ const BOX = preload("res://box.tscn")
 @onready var map = $TileMap
 @onready var main = get_node("/root/Main")
 
-@export var tile_size = 16
+@export var tile_size = 32
 @export var num_rooms = LevelStats.numRooms
 @export var min_size = randi_range(4,5)
 @export var max_size = randi_range(5,13)
@@ -153,7 +153,7 @@ func make_map():
 	var bottomright = map.local_to_map(full_rect.end)
 	for x in range(topleft.x, bottomright.x):
 		for y in range(topleft.y, bottomright.y):
-			map.set_cell(0, Vector2i(x, y), 4, Vector2i(xw, yw), 0)
+			map.set_cell(0, Vector2i(x, y), 0, Vector2i(xw, yw), 0)
 	var corridors = []
 	for room in $Rooms.get_children():
 		var s = (room.size / tile_size).floor()
@@ -161,8 +161,8 @@ func make_map():
 		var ul = (room.position / tile_size).floor() - s
 		for x in range(2, s.x * 2 -1):
 			for y in range(2, s.y * 2 -1):
-				map.set_cell(0, Vector2i(ul.x + x, ul.y + y), 4, Vector2i(xf, yf), 0)
-				map.set_cell(0, Vector2i(ul.x + x, ul.y + y), 4, Vector2i(xf, yf), 0)
+				map.set_cell(0, Vector2i(ul.x + x, ul.y + y), 0, Vector2i(xf, yf), 0)
+				map.set_cell(0, Vector2i(ul.x + x, ul.y + y), 0, Vector2i(xf, yf), 0)
 		var p = path.get_closest_point(Vector2(room.position.x, room.position.y))
 		for conn in path.get_point_connections(p):
 			if not conn in corridors:
@@ -184,11 +184,11 @@ func carve_path(pos1, pos2):
 		x_y = pos2
 		y_x = pos1
 	for x in range(pos1.x, pos2.x, x_diff):
-		map.set_cell(0, Vector2i(x, x_y.y), 4, Vector2i(4, 7), 0);
-		map.set_cell(0, Vector2i(x, x_y.y + y_diff), 4, Vector2i(4, 7), 0);
+		map.set_cell(0, Vector2i(x, x_y.y), 0, Vector2i(xf, yf), 0);
+		map.set_cell(0, Vector2i(x, x_y.y + y_diff), 0, Vector2i(xf, yf), 0);
 	for y in range(pos1.y, pos2.y, y_diff):
-		map.set_cell(0, Vector2i(y_x.x, y), 4, Vector2i(4, 7), 0);
-		map.set_cell(0, Vector2i(y_x.x + x_diff, y), 4, Vector2i(4, 7), 0);
+		map.set_cell(0, Vector2i(y_x.x, y), 0, Vector2i(xf, yf), 0);
+		map.set_cell(0, Vector2i(y_x.x + x_diff, y), 0, Vector2i(xf, yf), 0);
 
 func find_start_room():
 	var min_x = INF
