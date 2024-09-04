@@ -8,10 +8,10 @@ const BOX = preload("res://box.tscn")
 @onready var map = $TileMap
 @onready var main = get_node("/root/Main")
 
-@export var tile_size = 32
+@export var tile_size = 16
 @export var num_rooms = LevelStats.numRooms
-@export var min_size = randi_range(4,5)
-@export var max_size = randi_range(5,13)
+@export var min_size = randi_range(4 * LevelStats.minsfactor, 5 * LevelStats.maxsfactor)
+@export var max_size = randi_range(5 * LevelStats.minsfactor, 13 * LevelStats.maxsfactor)
 @export var hspread = LevelStats.hSpread
 @export var cull = randi_range(0.1,0.6)
 @export var enemy_min = LevelStats.enMin
@@ -26,6 +26,8 @@ var yw = LevelStats.YW
 var path 
 var start_room
 var end_room
+var top_room
+var bottom_room
 @onready var player = $Player
 @onready var spawners
 @onready var piss = $Spawners
@@ -38,6 +40,8 @@ func _ready():
 	await make_map()
 	await find_end_room()
 	await find_start_room()
+	await find_bottom_room()
+	await find_top_room()
 	await level_finish_generator()
 	await spawn_enemies()
 	await spawn_boxes()
@@ -45,7 +49,7 @@ func _ready():
 	PlayerStats.dead.connect(player_death)
 
 func generate_player():
-	player.position = end_room.position
+	player.position = bottom_room.position
 
 func make_rooms():
 	for i in range(num_rooms):
@@ -73,7 +77,7 @@ func make_rooms():
 func spawn_enemies():
 	spawners = $Spawners.get_children()
 	for spawn in spawners:
-		if spawn.global_position == start_room.global_position or spawn.global_position == end_room.global_position:
+		if spawn.global_position == start_room.global_position or spawn.global_position == end_room.global_position or spawn.global_position == bottom_room.global_position or spawn.global_position == top_room.global_position:
 			continue
 		else:
 			
@@ -203,6 +207,20 @@ func find_end_room():
 		if room.position.x > max_x:
 			end_room = room
 			max_x = room.position.x
+
+func find_top_room():
+	var max_Y = -INF
+	for room in $Rooms.get_children():
+		if room.position.y > max_Y:
+			bottom_room = room
+			max_Y = room.position.y
+
+func find_bottom_room():
+	var min_y = INF
+	for room in $Rooms.get_children():
+		if room.position.y < min_y:
+			top_room = room
+			min_y = room.position.y
 
 func player_death():
 	get_tree().change_scene_to_file("res://Menu.tscn")
