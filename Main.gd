@@ -13,7 +13,7 @@ const BOX = preload("res://box.tscn")
 @export var min_size = randi_range(4 * LevelStats.minsfactor, 5 * LevelStats.maxsfactor)
 @export var max_size = randi_range(5 * LevelStats.minsfactor, 13 * LevelStats.maxsfactor)
 @export var hspread = LevelStats.hSpread
-@export var cull = randi_range(0.1,0.6)
+@export var cull = randi_range(0.4,0.7)
 @export var enemy_min = LevelStats.enMin
 @export var enemy_max = LevelStats.enMax
 @export var box_min = randi_range(1,2)
@@ -24,8 +24,8 @@ var xw = LevelStats.XW
 var yw = LevelStats.YW
 
 var path 
-var start_room
-var end_room
+var left_room
+var right_room
 var top_room
 var bottom_room
 @onready var player = $Player
@@ -47,9 +47,11 @@ func _ready():
 	await spawn_boxes()
 	await generate_player()
 	PlayerStats.dead.connect(player_death)
+	if LevelStats.end == true:
+		get_tree().change_scene_to_file("res://Menu.tscn")
 
 func generate_player():
-	player.position = bottom_room.position
+	player.position = left_room.position
 
 func make_rooms():
 	for i in range(num_rooms):
@@ -77,7 +79,7 @@ func make_rooms():
 func spawn_enemies():
 	spawners = $Spawners.get_children()
 	for spawn in spawners:
-		if spawn.global_position == start_room.global_position or spawn.global_position == end_room.global_position or spawn.global_position == bottom_room.global_position or spawn.global_position == top_room.global_position:
+		if spawn.global_position == left_room.global_position or spawn.global_position == right_room.global_position or spawn.global_position == bottom_room.global_position or spawn.global_position == top_room.global_position:
 			continue
 		else:
 			
@@ -93,7 +95,7 @@ func spawn_boxes():
 	if LevelStats.boxes == true:
 		spawners = $Spawners.get_children()
 		for spawn in spawners:
-			if spawn.global_position == start_room.global_position or spawn.global_position == end_room.global_position:
+			if spawn.global_position == left_room.global_position or spawn.global_position == right_room.global_position or spawn.global_position == bottom_room.global_position or spawn.global_position == top_room.global_position:
 				continue
 			else:
 			
@@ -109,7 +111,7 @@ func spawn_boxes():
 
 func level_finish_generator():
 	var portal = FINISH_PORTAL.instantiate()
-	portal.global_position = end_room.global_position
+	portal.global_position = right_room.global_position
 	main.add_child(portal)
 
 func find_mst(nodes):
@@ -198,14 +200,14 @@ func find_start_room():
 	var min_x = INF
 	for room in $Rooms.get_children():
 		if room.position.x < min_x:
-			start_room = room
+			left_room = room
 			min_x = room.position.x
 
 func find_end_room():
 	var max_x = -INF
 	for room in $Rooms.get_children():
 		if room.position.x > max_x:
-			end_room = room
+			right_room = room
 			max_x = room.position.x
 
 func find_top_room():

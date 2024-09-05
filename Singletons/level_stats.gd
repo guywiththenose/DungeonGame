@@ -12,10 +12,11 @@ var XW = 0
 var YW = 0
 var minsfactor = 1
 var maxsfactor = 1
+var end = false
 
 func update_level():
-	minsfactor += 0.2
-	maxsfactor += 0.2
+	minsfactor += 0.05
+	maxsfactor += 0.05
 	level_number += 1
 	hSpread *= 1.2  
 	enMin += 1
@@ -27,3 +28,5 @@ func update_level():
 	YW += 1
 	if level_number >= 3:
 		boxes = true
+	if level_number >= 8:
+		end = true

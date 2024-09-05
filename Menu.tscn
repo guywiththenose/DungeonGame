@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dd3o4x2leclnd"]
+[gd_scene load_steps=3 format=3 uid="uid://dd3o4x2leclnd"]
 
 [ext_resource type="Script" path="res://Wait.gd" id="1_446ur"]
+[ext_resource type="Texture2D" uid="uid://dmwc10o3gkkq3" path="res://art.png" id="2_w0et5"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -40,6 +41,12 @@ offset_bottom = 76.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "Start"
+
+[node name="Art" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(578, 325.5)
+scale = Vector2(7.2, 7.23333)
+texture = ExtResource("2_w0et5")
 
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
