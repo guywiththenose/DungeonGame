@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bn85kdfgutoyg"]
+[gd_scene load_steps=16 format=3 uid="uid://bn85kdfgutoyg"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_v4u6f"]
 [ext_resource type="Texture2D" uid="uid://c85wxe1pxme2x" path="res://New Piskel.png" id="2_krigf"]
 [ext_resource type="Script" path="res://UI.gd" id="3_875vu"]
 [ext_resource type="Texture2D" uid="uid://clb6edpolnx2n" path="res://image.png" id="4_81hli"]
 [ext_resource type="Texture2D" uid="uid://b0xmkm0hls0ng" path="res://e2-00000_840.png" id="5_4pjbj"]
+[ext_resource type="FontFile" uid="uid://dgbpylf0j8m4h" path="res://pixelite/pixelplay/pixelplay.ttf" id="5_kmjgm"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jq5pa"]
 radius = 7.0
@@ -121,6 +122,8 @@ offset_top = 12.0
 offset_right = -887.0
 offset_bottom = 39.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("5_kmjgm")
+theme_override_font_sizes/font_size = 48
 theme_override_styles/background = SubResource("StyleBoxFlat_mvr6b")
 theme_override_styles/fill = SubResource("StyleBoxFlat_jslra")
 value = 100.0

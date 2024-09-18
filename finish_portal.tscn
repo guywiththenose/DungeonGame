@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://d42r76ccqohv"]
+[gd_scene load_steps=12 format=3 uid="uid://d42r76ccqohv"]
 
 [ext_resource type="Texture2D" uid="uid://31j50kk6eosf" path="res://New Piskel (3).png" id="1_hnpwx"]
 [ext_resource type="Script" path="res://finish_portal.gd" id="1_mju7m"]
+[ext_resource type="FontFile" uid="uid://dgbpylf0j8m4h" path="res://pixelite/pixelplay/pixelplay.ttf" id="2_frv4x"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xcqmf"]
 radius = 20.0
@@ -64,11 +65,12 @@ z_index = 20
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -52.0
-offset_top = -36.0
-offset_right = 52.0
-offset_bottom = -21.0
+offset_left = -38.0
+offset_top = -38.0
+offset_right = 66.0
+offset_bottom = -17.0
 grow_horizontal = 2
+theme_override_fonts/font = ExtResource("2_frv4x")
 text = "[E] To Interact"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

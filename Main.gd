@@ -33,6 +33,7 @@ var bottom_room
 @onready var piss = $Spawners
 
 @export var draw_rooms = false
+@export var box = false
 
 func _ready():
 	randomize()
@@ -48,7 +49,7 @@ func _ready():
 	await generate_player()
 	PlayerStats.dead.connect(player_death)
 	if LevelStats.end == true:
-		get_tree().change_scene_to_file("res://Menu.tscn")
+		get_tree().change_scene_to_file("res://win.tscn")
 
 func generate_player():
 	player.position = left_room.position
@@ -92,7 +93,7 @@ func spawn_enemies():
 				enemy.global_position += Vector2(randi_range(-30,30), randi_range(-30,30))
 
 func spawn_boxes():
-	if LevelStats.boxes == true:
+	if LevelStats.boxes == true and box == true:
 		spawners = $Spawners.get_children()
 		for spawn in spawners:
 			if spawn.global_position == left_room.global_position or spawn.global_position == right_room.global_position or spawn.global_position == bottom_room.global_position or spawn.global_position == top_room.global_position:
@@ -225,7 +226,7 @@ func find_bottom_room():
 			min_y = room.position.y
 
 func player_death():
-	get_tree().change_scene_to_file("res://Menu.tscn")
+	get_tree().change_scene_to_file("res://death.tscn")
 
 func _process(delta):
 	queue_redraw()
