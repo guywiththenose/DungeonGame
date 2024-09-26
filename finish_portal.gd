@@ -4,7 +4,7 @@ var interactable = false
 
 func _ready() -> void:
 	label.hide()
-
+#makes label visible and makes interactable option available
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		interactable = true

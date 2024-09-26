@@ -1,5 +1,5 @@
 extends Control
-
+#functions to make the start and quit buttons work
 func _on_quit_pressed():
 	get_tree().quit()
 

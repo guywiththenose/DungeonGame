@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 var size
-
+#codes for room collision bodies that work with the main body code
 func make_room(_pos,_size):
 	position = _pos
 	size = _size

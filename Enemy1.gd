@@ -11,9 +11,8 @@ extends CharacterBody2D
 @onready var los = $RayCast2D
 
 var player_spotted = false
-
+#creates a path to follow towards player on sight
 func _ready() -> void:
-	# Optionally initialize any necessary logic here
 	los.enabled = true
 
 func check_collision():

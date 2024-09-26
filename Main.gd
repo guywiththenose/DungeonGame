@@ -34,7 +34,7 @@ var bottom_room
 
 @export var draw_rooms = false
 @export var box = false
-
+#runs all the functions
 func _ready():
 	randomize()
 	await make_rooms()
@@ -50,10 +50,10 @@ func _ready():
 	PlayerStats.dead.connect(player_death)
 	if LevelStats.end == true:
 		get_tree().change_scene_to_file("res://win.tscn")
-
+#function to bring player to dungeon, is called upon dtart of scene
 func generate_player():
 	player.position = left_room.position
-
+#uses collision body from room scene to create a dungeon layout
 func make_rooms():
 	for i in range(num_rooms):
 		var pos = Vector2(randf_range(-hspread, hspread), 0)
@@ -76,7 +76,7 @@ func make_rooms():
 			
 	await get_tree().process_frame
 	path = find_mst(room_positions)
-
+#summons random enemy amounts in each room
 func spawn_enemies():
 	spawners = $Spawners.get_children()
 	for spawn in spawners:
@@ -91,7 +91,7 @@ func spawn_enemies():
 				enemy.global_position = spawn_point.global_position
 				main.add_child(enemy)
 				enemy.global_position += Vector2(randi_range(-30,30), randi_range(-30,30))
-
+#same as enemy code, currently not activated due to issues
 func spawn_boxes():
 	if LevelStats.boxes == true and box == true:
 		spawners = $Spawners.get_children()
@@ -109,7 +109,7 @@ func spawn_boxes():
 					box.global_position += Vector2(randi_range(-25,25), randi_range(-25,25))
 	else:
 		pass
-
+#create finish portal when the dungeon is created
 func level_finish_generator():
 	var portal = FINISH_PORTAL.instantiate()
 	portal.global_position = right_room.global_position
@@ -136,7 +136,7 @@ func find_mst(nodes):
 		path.connect_points(path.get_closest_point(p), n)
 		nodes.erase(min_p)
 	return path
-
+#draws rooms. Was created for debugging purposes
 func _draw():
 	if not draw_rooms:
 		return
@@ -149,7 +149,7 @@ func _draw():
 				var pp = path.get_point_position(p)
 				var cp = path.get_point_position(c)
 				draw_line(Vector2(pp.x, pp.y), Vector2(cp.x, cp.y), Color(1,1,0), 15, true)
-
+#creates a tilemap around the collision bodies and defined corridors
 func make_map():
 	map.clear()
 	var full_rect = Rect2()
@@ -196,7 +196,7 @@ func carve_path(pos1, pos2):
 	for y in range(pos1.y, pos2.y, y_diff):
 		map.set_cell(0, Vector2i(y_x.x, y), 0, Vector2i(xf, yf), 0);
 		map.set_cell(0, Vector2i(y_x.x + x_diff, y), 0, Vector2i(xf, yf), 0);
-
+#following functions find positions of rooms
 func find_start_room():
 	var min_x = INF
 	for room in $Rooms.get_children():
@@ -224,7 +224,7 @@ func find_bottom_room():
 		if room.position.y < min_y:
 			top_room = room
 			min_y = room.position.y
-
+#"kills" player by changing to the lose screen
 func player_death():
 	get_tree().change_scene_to_file("res://death.tscn")
 

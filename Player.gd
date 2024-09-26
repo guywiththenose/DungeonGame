@@ -12,12 +12,12 @@ var knife_ready = false
 @onready var UI = $UI
 
 signal enemy
-
+#connects to player data singleton, reducing health and flashing red when enemy collides
 func _ready():
 	PlayerStats.take_damage.connect(player_damage)
 	UI.update_health()
 	
-
+#codes for player movement. Movement is orthagonal and works with WASD keys and click for knife
 func _process(delta):
 	direction = Input.get_vector("left", "right", "up", "down")
 	if Input.is_action_pressed("attack") and knife_ready == true:
@@ -35,7 +35,7 @@ func _physics_process(delta):
 		red.flip_h = true
 		
 	move_and_slide()
-
+#creates knife when clicked
 func knife():
 	var knife = throwing_knife.instantiate()
 	knife.global_position = global_position

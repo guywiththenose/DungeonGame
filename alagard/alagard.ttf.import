@@ -15,7 +15,6 @@ dest_files=["res://.godot/imported/alagard.ttf-0d8d815d21d82d1c5e544e2e9e91f025.
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
-disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
